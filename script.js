@@ -62,6 +62,28 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
     if(orient == 0){
         // if divide horizontally, it cannot take place at the first and last row
         row_pt = getRandInteger(min_row + 1, max_row - 1);
+
+        var abv_row_pt = (row_pt - min_row) % 2;
+        var bel_row_pt = (max_row - row_pt) % 2;
+        
+        if(abv_row_pt != 1 || bel_row_pt != 1){
+
+            console.log("Even column(s)!");
+            
+            // to acheive odd columns on both sides
+            // Generate random integer to determine whether to minus or plus 1
+            var temp = getRandInteger(0, 1);
+
+            if(temp == 0){
+
+                row_pt = row_pt - 1;
+            }
+            else{
+
+                row_pt = row_pt + 1;
+            }
+        }
+
         col_pt = getRandInteger(min_col, max_col);
 
         console.log("row_pt: " + row_pt);
@@ -88,6 +110,27 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
         // if divide vertically, it cannot take place at the first and last column
         row_pt = getRandInteger(min_row, max_row);
         col_pt = getRandInteger(min_col + 1, max_col - 1);
+
+        var bef_col_pt = (col_pt - min_col) % 2;
+        var aft_col_pt = (max_col - col_pt) % 2;
+        
+        if(bef_col_pt != 1 || aft_col_pt != 1){
+
+            console.log("Even column(s)!");
+            
+            // to acheive odd columns on both sides
+            // Generate random integer to determine whether to minus or plus 1
+            var temp = getRandInteger(0, 1);
+
+            if(temp == 0){
+                
+                col_pt = col_pt - 1;
+            }
+            else{
+
+                col_pt = col_pt + 1;
+            }
+        }
 
         console.log("row_pt: " + row_pt);
         console.log("col_pt: " + col_pt);
@@ -116,8 +159,8 @@ window.onload = function() {
     const container = document.getElementById("gridSpace");
     const table = document.createElement("table");
 
-    // CELL DIMENSION "25 x 25"
-    const cell_size = 25;
+    // CELL DIMENSION "33 x 33"
+    const cell_size = 33;
 
     const num_cols = Math.floor(250/cell_size);
     const num_rows = Math.floor(250/cell_size);
