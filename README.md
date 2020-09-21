@@ -1,3 +1,8 @@
+# Maze Generation
+1. Recursive Division Algorithm  
+1.1 Avoid 4 celled square   
+1.2 Avoid blocking gap 
+
 # Contributing Guidelines [Forking Workflow]
 1. Fork the repo on GitHub    
 2. Clone the repository to your local machine     
@@ -21,18 +26,3 @@
 
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
-# Maze
-
-1. How to color border? 
-2. How to split?
-- What if split vertically and it's next to L/R?
-- What if split horizontally and it's next to T/B?
-- What if cell at TR/TL/BR/BL? 
-- What if a square appeared? 
-Ans: Odd separation. Vertically or Horizontally.
-- What if split at a cell spacing?
-- What if whole column/row is "1"? That means no split occured?
-- What if single column/row?
-
-Things to note:
-- grid must be odd length & breadth
