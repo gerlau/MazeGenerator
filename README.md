@@ -1,6 +1,6 @@
 # Contributing Guidelines [Forking Workflow]
-1. Fork the repo on GitHub (if you do not own the repo)  
-2. Clone the repository to your own machine  
+1. Fork the repo on GitHub   
+2. Clone the repository to your local machine  
 2.1 Copy the web_url  
 2.2 `git clone "web_url"`  
 ![contributing_clone](https://user-images.githubusercontent.com/48362970/93743747-2e5b1f00-fc23-11ea-9d90-8a286888296a.png)  
