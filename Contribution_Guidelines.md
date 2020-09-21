@@ -36,7 +36,7 @@ git checkout -b new-branch
 ```
 
 # 4. Make the necessary changes and commit those changes to your current branch    
-:bulb: Tips: Execute `git status` to view the changes | Execute `git branch` to check which branch you are on.
+:bulb: Tips: `git status` to view the changes | `git branch` to check which branch you are on.
 
 4.1 Add those changes to the branch you just created by executing the following git command:
 ```
