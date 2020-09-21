@@ -1,3 +1,15 @@
+# Contributing Guidelines [Fork-and-Pull Workflow]
+1. Fork the repo on GitHub (if you do not own the repo)
+2. Clone the repository to your own machine
+2.1 git clone "web_url"
+
+3. Create a **new branch** to work on new additions
+3. **Commit** changes to your own branch
+4. Push your work back up to your fork
+5. Submit a Pull request so that we can review your changes
+
+NOTE: Be sure to merge the latest from "upstream" before making a pull request!
+
 # Maze
 
 1. How to color border? 
