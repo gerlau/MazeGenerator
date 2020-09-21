@@ -25,35 +25,42 @@ git clone "https://github.com/gerlau/Maze.git"
 ```
 Here you're copying the contents of the first-contributions repository on GitHub to your computer.
 
-# 3. Create a branch 
-3.1 Change to the repository directory on your computer (if you are not already there):
+# 4. Add a remote origin 
+Open a terminal and run the following git command:
+```
+git remote add origin "web_url"
+```
+The git remote command is one piece of the broader system which is responsible for syncing changes.
+
+# 4. Create a branch 
+4.1 Change to the repository directory on your computer (if you are not already there):
 ```
 cd "the repository_name"/
 ```
-3.2 Now create a branch using the following git command:
+4.2 Now create a branch using the following git command:
 ```
 git checkout -b new-branch
 ```
 
-# 4. Make the necessary changes and commit those changes to your current branch    
+# 5. Make the necessary changes and commit those changes to your current branch    
 :bulb: Tips: `git status` to view the changes | `git branch` to check which branch you are on.
 
-4.1 Add those changes to the branch you just created by executing the following git command:
+5.1 Add those changes to the branch you just created by executing the following git command:
 ```
 git add .
 ```
 
 Note: `git add .` tells Git that you want to include updates to a particular file in the next commit. However, git add doesn't really affect the repository in any significant way—changes are not actually recorded until you run git commit. 
 
-4.2 Commit those changes by executing the following git command:
+5.2 Commit those changes by executing the following git command:
 ```
 git commit -m "Create README.md" -m "Some desc"
 ```
 
-# 5. Push changes to GitHub
-5.1 Push your changes by executing the following git command:
+# 6. Push changes to GitHub
+6.1 Push your changes by executing the following git command:
 ```
-git push origin branch
+git push -u origin branch
 ```
 
 # 6. Submit your changes for review
