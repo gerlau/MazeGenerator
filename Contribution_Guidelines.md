@@ -61,7 +61,9 @@ git push origin branch
 6.2 Now submit the pull request by clicking `Create pull request` button.
 6.3 If all conversation are resolved then Click `Merge pull request` and `Confirm Merge` buttons.   
 6.4 Once merged, update your local machine repo  
-6.4.1 `git checkout master`  
-6.4.2 `git pull`  
+```
+git checkout master  
+git pull
+```
 
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!
