@@ -1,7 +1,7 @@
 # Contributing Guidelines [Fork-and-Pull Workflow]
-1. Fork the repo on GitHub (if you do not own the repo)
-2. Clone the repository to your own machine
-2.1 git clone "web_url"
+1. Fork the repo on GitHub (if you do not own the repo)\
+2. Clone the repository to your own machine\
+> git clone "web_url"
 ![contributing_clone](https://user-images.githubusercontent.com/48362970/93743747-2e5b1f00-fc23-11ea-9d90-8a286888296a.png)
 3. Create a **new branch** to work on new additions
 3. **Commit** changes to your own branch
