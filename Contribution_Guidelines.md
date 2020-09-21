@@ -57,9 +57,9 @@ git push origin branch
 ```
 
 # 6. Submit your changes for review
-6.1 If you go to your repository on GitHub, you'll see a `Compare & pull request` button. Click on that button.
-6.2 Now submit the pull request by clicking `Create pull request` button.
-6.3 If all conversation are resolved then Click `Merge pull request` and `Confirm Merge` buttons.   
+6.1 If you go to your repository on GitHub, you'll see a `Compare & pull request` button. Click on that button.  
+6.2 Now submit the pull request by clicking `Create pull request` button.   
+6.3 If all conversation are resolved then click `Merge pull request` and `Confirm Merge` buttons.    
 6.4 Once merged, update your local machine repo  
 ```
 git checkout master  
