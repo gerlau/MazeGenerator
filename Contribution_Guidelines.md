@@ -25,7 +25,7 @@ git clone "https://github.com/gerlau/Maze.git"
 ```
 Here you're copying the contents of the first-contributions repository on GitHub to your computer.
 
-# 4. Add a remote origin 
+# 3. Add a remote origin 
 Open a terminal and run the following git command:
 ```
 git remote add origin "web_url"
@@ -63,11 +63,11 @@ git commit -m "Create README.md" -m "Some desc"
 git push -u origin branch
 ```
 
-# 6. Submit your changes for review
-6.1 If you go to your repository on GitHub, you'll see a `Compare & pull request` button. Click on that button.  
-6.2 Now submit the pull request by clicking `Create pull request` button.   
-6.3 If all conversation are resolved then click `Merge pull request` and `Confirm Merge` buttons.    
-6.4 Once merged, update your local machine repo  
+# 7. Submit your changes for review
+7.1 If you go to your repository on GitHub, you'll see a `Compare & pull request` button. Click on that button.  
+7.2 Now submit the pull request by clicking `Create pull request` button.   
+7.3 If all conversation are resolved then click `Merge pull request` and `Confirm Merge` buttons.    
+7.4 Once merged, update your local machine repo  
 ```
 git checkout master  
 git pull
