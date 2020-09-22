@@ -3,8 +3,9 @@
 // Window size : window.outerHeight | window.outerWidth
 // Content size: window.innerHeight | window.innerWidth
 
-// CONTINUE NEXT HOLIDAY SEMESTER!!!
-// ** EACH PATH SHOULD BE ONE COLUMN/ROW WIDE
+// the way you determine the gap matters
+// create gap if only lhs > rhs of gap or rhs > lhs of gap
+// create gap if only top > bot of gap or bot > top of gap 
 
 function getRandInteger(min, max) {
     // Inclusive of min & max
@@ -52,14 +53,14 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
     }
 
     console.log("orient: " + orient);
-
-    // Determine Point of Division & Gap   
+   
     var row_pt = 0;
     var col_pt = 0;
 
     var table = document.querySelector("table");
 
     if(orient == 0){
+        // determine Point of Division 
         // if divide horizontally, it cannot take place at the first and last row
         row_pt = getRandInteger(min_row + 1, max_row - 1);
 
@@ -70,21 +71,36 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
 
             console.log("Even column(s)!");
             
-            // to acheive odd columns on both sides
+            // to avoid 4-celled squares, divide with odd columns on both sides
             // Generate random integer to determine whether to minus or plus 1
             var temp = getRandInteger(0, 1);
 
             if(temp == 0){
-
                 row_pt = row_pt - 1;
             }
             else{
-
                 row_pt = row_pt + 1;
             }
         }
 
-        col_pt = getRandInteger(min_col, max_col);
+        // check whether the lhs/rhs of the division has a gap
+        var lhs_is_gap = maze_2DArray[row_pt][min_col - 1] == "1";
+        var rhs_is_gap = maze_2DArray[row_pt][max_col + 1] == "1";
+
+        console.log("lhs_is_gap: " + lhs_is_gap);
+        console.log("rhs_is_gap: " + rhs_is_gap);
+
+        if(lhs_is_gap){
+            // if lhs has a gap, division gap will be next to the lhs gap
+            col_pt = min_col;
+        }
+        else if(rhs_is_gap){
+            // if rhs has a gap, division gap will be next to the rhs gap
+            col_pt = max_col;
+        }
+        else{
+            col_pt = getRandInteger(min_col, max_col);
+        }
 
         console.log("row_pt: " + row_pt);
         console.log("col_pt: " + col_pt);
@@ -107,8 +123,8 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
         recursiveDivisionAlgorithm(maze_2DArray, row_pt + 1, min_col, max_row, max_col);
     }
     else{
+        // determine Point of Division 
         // if divide vertically, it cannot take place at the first and last column
-        row_pt = getRandInteger(min_row, max_row);
         col_pt = getRandInteger(min_col + 1, max_col - 1);
 
         var bef_col_pt = (col_pt - min_col) % 2;
@@ -118,18 +134,35 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
 
             console.log("Even column(s)!");
             
-            // to acheive odd columns on both sides
+            // to avoid 4-celled squares, divide with odd columns on both sides
             // Generate random integer to determine whether to minus or plus 1
             var temp = getRandInteger(0, 1);
 
             if(temp == 0){
-                
                 col_pt = col_pt - 1;
             }
             else{
-
                 col_pt = col_pt + 1;
             }
+        }
+
+        // check whether the top/bot of the division has a gap
+        var top_is_gap = maze_2DArray[min_row - 1][col_pt] == "1";
+        var bot_is_gap = maze_2DArray[max_row + 1][col_pt] == "1";
+
+        console.log("top_is_gap: " + top_is_gap);
+        console.log("bot_is_gap: " + bot_is_gap);
+
+        if(top_is_gap){
+            // if top has a gap, division gap will be below the top gap
+            row_pt = min_row;
+        }
+        else if(bot_is_gap){
+            // if bottom has a gap, division gap will be above the bottom gap
+            row_pt = max_row;
+        }
+        else{
+            row_pt = getRandInteger(min_row, max_row);
         }
 
         console.log("row_pt: " + row_pt);
@@ -159,14 +192,15 @@ window.onload = function() {
     const container = document.getElementById("gridSpace");
     const table = document.createElement("table");
 
-    // CELL DIMENSION "33 x 33"
-    const cell_size = 33;
+    // CELL DIMENSION "26 x 26"
+    const cell_size = 26;
 
     const num_cols = Math.floor(250/cell_size);
     const num_rows = Math.floor(250/cell_size);
 
-    console.log(num_cols);
-    console.log(num_rows);
+    // the current maze must be of odd height & length 
+    console.log("Height of grid: " + num_cols);
+    console.log("Length of grid: " + num_rows);
 
     // Initialize a 2D array to keep track of cell status
     // Cell status "1" : Available 
@@ -189,14 +223,32 @@ window.onload = function() {
 
             row.appendChild(cell);
 
-            maze_2DArray[i][j] = "1";
+            var top = i == 0;
+            var bot = i == num_rows - 1;
+            var lef = j == 0;
+            var rig = j == num_cols - 1;
+
+            if(top || bot || lef || rig){
+                // painting border
+                maze_2DArray[i][j] = "0";
+
+                cell.style.background = "rgb(255,0,0)";
+            }
+            else{
+                // current maze 
+                maze_2DArray[i][j] = "1";
+            }
         }
     }  
 
     container.appendChild(table);
 
-    // recursiveDivisionAlgorithm(2DArray, min_row, min_col, max_row, max_col)
-    recursiveDivisionAlgorithm(maze_2DArray, 0, 0, num_rows - 1, num_cols - 1);
+    const min_row = 1;
+    const min_col = 1;
+    const max_row = num_rows - 2;
+    const max_col = num_cols - 2;
+
+    recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max_col);
 }
 
 
