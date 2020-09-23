@@ -3,10 +3,6 @@
 // Window size : window.outerHeight | window.outerWidth
 // Content size: window.innerHeight | window.innerWidth
 
-// the way you determine the gap matters
-// create gap if only lhs > rhs of gap or rhs > lhs of gap
-// create gap if only top > bot of gap or bot > top of gap 
-
 function getRandInteger(min, max) {
     // Inclusive of min & max
     return Math.floor(Math.random() * (max - min + 1) ) + min;
@@ -71,7 +67,7 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
 
             console.log("Even column(s)!");
             
-            // to avoid 4-celled squares, divide with odd columns on both sides
+            // to avoid 4-celled squares, divide with odd rows on both sides
             // Generate random integer to determine whether to minus or plus 1
             var temp = getRandInteger(0, 1);
 
@@ -81,25 +77,58 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
             else{
                 row_pt = row_pt + 1;
             }
-        }
+        } 
 
-        // check whether the lhs/rhs of the division has a gap
+        // check whether the lhs/rhs of the division has gap
+        // first: try moving upwards
+        // next : try moving downwards 
+        /*
         var lhs_is_gap = maze_2DArray[row_pt][min_col - 1] == "1";
         var rhs_is_gap = maze_2DArray[row_pt][max_col + 1] == "1";
 
-        console.log("lhs_is_gap: " + lhs_is_gap);
-        console.log("rhs_is_gap: " + rhs_is_gap);
+        var gap_counter = 1;
 
-        if(lhs_is_gap){
-            // if lhs has a gap, division gap will be next to the lhs gap
-            col_pt = min_col;
+        while(lhs_is_gap || rhs_is_gap){
+
+            console.log("lhs_is_gap: " + lhs_is_gap);
+            console.log("rhs_is_gap: " + rhs_is_gap);
+
+            var go_up = row_pt - 2;
+            var go_dw = row_pt + (gap_counter * 2);
+
+            if(go_up < min_row){
+                // no gap found so no count 
+                row_pt = go_dw;
+            }
+            else{
+                // gap found, counter + 1
+                gap_counter++;
+                
+                row_pt = go_up;
+            }
         }
-        else if(rhs_is_gap){
-            // if rhs has a gap, division gap will be next to the rhs gap
-            col_pt = max_col;
-        }
-        else{
-            col_pt = getRandInteger(min_col, max_col);
+        */
+
+        // determine the gap 
+        col_pt = getRandInteger(min_col, max_col);
+
+        var lhs_len = (col_pt - min_col) % 2;
+        var rhs_len = (max_col - col_pt) % 2;
+
+        if(lhs_len != 0 || rhs_len != 0){
+
+            console.log("Odd column(s)!");
+            
+            // to avoid a square division, the gap should be left with even cols on both sides
+            // generate random integer to determine whether to minus or plus 1
+            var temp = getRandInteger(0, 1);
+
+            if(temp == 0){
+                col_pt = col_pt - 1;
+            }
+            else{
+                col_pt = col_pt + 1;
+            }
         }
 
         console.log("row_pt: " + row_pt);
@@ -146,23 +175,56 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
             }
         }
 
+        /*
         // check whether the top/bot of the division has a gap
+        // first: try moving left
+        // next : try moving right 
         var top_is_gap = maze_2DArray[min_row - 1][col_pt] == "1";
         var bot_is_gap = maze_2DArray[max_row + 1][col_pt] == "1";
 
-        console.log("top_is_gap: " + top_is_gap);
-        console.log("bot_is_gap: " + bot_is_gap);
+        var gap_counter = 1;
 
-        if(top_is_gap){
-            // if top has a gap, division gap will be below the top gap
-            row_pt = min_row;
+        while(top_is_gap || bot_is_gap){
+
+            console.log("top_is_gap: " + top_is_gap);
+            console.log("bot_is_gap: " + bot_is_gap);
+
+            var go_lft = col_pt - 2;
+            var go_rgt = col_pt + (gap_counter * 2);
+
+            if(go_lft < min_col){
+                // no gap found so no count 
+                col_pt = go_rgt;
+            }
+            else{
+                // gap found, counter + 1
+                gap_counter++;
+
+                col_pt = go_lft;
+            }
         }
-        else if(bot_is_gap){
-            // if bottom has a gap, division gap will be above the bottom gap
-            row_pt = max_row;
-        }
-        else{
-            row_pt = getRandInteger(min_row, max_row);
+        */
+
+        // determine the gap 
+        row_pt = getRandInteger(min_row, max_row);
+
+        var top_len = (row_pt - min_row) % 2;
+        var bot_len = (max_row - row_pt) % 2;
+
+        if(top_len != 0 || bot_len != 0){
+
+            console.log("Odd row(s)!");
+            
+            // to avoid a square division, the gap should be left with even rows on both sides
+            // generate random integer to determine whether to minus or plus 1
+            var temp = getRandInteger(0, 1);
+
+            if(temp == 0){
+                row_pt = row_pt - 1;
+            }
+            else{
+                row_pt = row_pt + 1;
+            }
         }
 
         console.log("row_pt: " + row_pt);
