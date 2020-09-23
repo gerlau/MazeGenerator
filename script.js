@@ -3,6 +3,9 @@
 // Window size : window.outerHeight | window.outerWidth
 // Content size: window.innerHeight | window.innerWidth
 
+// NEXT TERM
+// Visualize the animations of cells 
+
 function getRandInteger(min, max) {
     // Inclusive of min & max
     return Math.floor(Math.random() * (max - min + 1) ) + min;
@@ -79,36 +82,6 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
             }
         } 
 
-        // check whether the lhs/rhs of the division has gap
-        // first: try moving upwards
-        // next : try moving downwards 
-        /*
-        var lhs_is_gap = maze_2DArray[row_pt][min_col - 1] == "1";
-        var rhs_is_gap = maze_2DArray[row_pt][max_col + 1] == "1";
-
-        var gap_counter = 1;
-
-        while(lhs_is_gap || rhs_is_gap){
-
-            console.log("lhs_is_gap: " + lhs_is_gap);
-            console.log("rhs_is_gap: " + rhs_is_gap);
-
-            var go_up = row_pt - 2;
-            var go_dw = row_pt + (gap_counter * 2);
-
-            if(go_up < min_row){
-                // no gap found so no count 
-                row_pt = go_dw;
-            }
-            else{
-                // gap found, counter + 1
-                gap_counter++;
-                
-                row_pt = go_up;
-            }
-        }
-        */
-
         // determine the gap 
         col_pt = getRandInteger(min_col, max_col);
 
@@ -174,36 +147,6 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
                 col_pt = col_pt + 1;
             }
         }
-
-        /*
-        // check whether the top/bot of the division has a gap
-        // first: try moving left
-        // next : try moving right 
-        var top_is_gap = maze_2DArray[min_row - 1][col_pt] == "1";
-        var bot_is_gap = maze_2DArray[max_row + 1][col_pt] == "1";
-
-        var gap_counter = 1;
-
-        while(top_is_gap || bot_is_gap){
-
-            console.log("top_is_gap: " + top_is_gap);
-            console.log("bot_is_gap: " + bot_is_gap);
-
-            var go_lft = col_pt - 2;
-            var go_rgt = col_pt + (gap_counter * 2);
-
-            if(go_lft < min_col){
-                // no gap found so no count 
-                col_pt = go_rgt;
-            }
-            else{
-                // gap found, counter + 1
-                gap_counter++;
-
-                col_pt = go_lft;
-            }
-        }
-        */
 
         // determine the gap 
         row_pt = getRandInteger(min_row, max_row);
