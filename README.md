@@ -1,9 +1,8 @@
-# Maze Generation
-## 1. What is this project about?
-Generating a maze based on recursive division algorithm with Javascript/HTML.
+# What is this project about?
+Generating a maze with Javascript/HTML
+* Based on recursive division algorithm
 
-## 2. Problems faced
-
+# How are we going to do it?
 > :warning: Dividing each current space resulting in even cols/rows will create a 4-cell square situation that puts the program in a dilema on where to split.
 
 <img width="200" height="200" src="https://user-images.githubusercontent.com/48362970/94020755-dcaec200-fde5-11ea-88e1-c32756236bf8.png"/> 
