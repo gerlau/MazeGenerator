@@ -6,27 +6,93 @@
     <title>Maze Generator</title>
 
     <style type="text/css">
+
+        table {
+            border-collapse:collapse;
+            border-spacing: 0;
+        }
+
         /* EACH CELL */
         table td {
             width: 25px;
             height: 25px;
-            border: 1px solid black;
         }
 
-        table {
-            border-collapse:collapse;
-            border: 1px solid black;
-            border-spacing: 0;
+        .notcolored {
+            background-color: rgb(255, 255, 255);
         }
-    
+
+        /* following css is referenced from https://clementmihailescu.github.io/Pathfinding-Visualizer/# */
+        .colored {
+            animation-name: wallAnimation;
+            animation-duration: 0.5s;
+            animation-timing-function: ease-out;
+            animation-direction: alternate;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+            animation-play-state: running;
+        }
+
+        @keyframes wallAnimation {
+            
+            0% {
+                transform: scale(.3);
+                background-color: rgb(66,81,93);
+            }
+
+            50% {
+                transform: scale(1.2);
+                background-color: rgb(66,81,93);
+            }
+
+            100% {
+                transform: scale(1.0);
+                background-color: rgb(66,81,93);
+            }
+        }
+
     </style>
 </head>
 <body>
 
-    <div id="gridSpace">
+    <button type="button" id="genBtn" onclick ="generate()">Generate</button>
 
-    </div>
+    <br><br>
     
+    <div id="gridSpace">
+    </div>
+
+    <script>
+
+        window.onload = function() {
+
+            const container = document.getElementById("gridSpace");
+            const table = document.createElement("table");
+            table.setAttribute("id", "maze");
+
+            // the current maze must be of odd height & length 
+            const num_cols = 53;
+            const num_rows = 13;
+
+            for(var i=0; i<num_rows; i++){
+                
+                const row = document.createElement("tr");
+
+                table.appendChild(row);
+
+                for(var j=0; j<num_cols; j++){
+                    
+                    const cell = document.createElement("td");
+                    
+                    cell.id = `${j},${i}`;
+
+                    row.appendChild(cell);
+                }
+            }  
+
+            container.appendChild(table);
+        };
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

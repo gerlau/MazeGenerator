@@ -11,6 +11,36 @@ function getRandInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
+function getOpening(num_cols, num_rows, direction) {
+
+    var isOpen = false;
+
+    var col_pos = 0;
+
+    if(direction < 0) { col_pos = num_cols-1; }
+
+    do {
+
+        var row_pos = getRandInteger(1, num_rows-2);
+
+        // find out if the cell is styled
+        var str_id = (col_pos + direction).toString() + "," + row_pos.toString();
+        isOpen = (document.getElementById(str_id).className == "colored");
+
+        console.log("====")
+        console.log(str_id);
+        console.log(isOpen);
+
+        if(!isOpen) {
+
+            // if not styled, this cell can be open
+            str_id = col_pos.toString() + "," + row_pos.toString();
+            document.getElementById(str_id).className = "notcolored";
+        }
+    }
+    while(isOpen);
+}
+
 function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max_col){
 
     console.log("recursiveDivisionAlgorithm()");
@@ -114,9 +144,8 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
 
             if(i != col_pt){
                 // if not gap, then color red & mark
-                selected.style.background = "rgb(255,0,0)";
-
                 maze_2DArray[row_pt][i] = "0";
+                selected.className = "colored";
             }
         }
 
@@ -180,9 +209,8 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
 
             if(i != row_pt){
                 // if not gap, then color red & mark
-                selected.style.background = "rgb(255,0,0)";
-
                 maze_2DArray[i][col_pt] = "0";
+                selected.className = "colored";
             }
         }
 
@@ -192,20 +220,13 @@ function recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max
     }
 }
 
-window.onload = function() {
-
-    const container = document.getElementById("gridSpace");
-    const table = document.createElement("table");
-
-    // CELL DIMENSION "26 x 26"
-    const cell_size = 26;
-
-    const num_cols = Math.floor(250/cell_size);
-    const num_rows = Math.floor(250/cell_size);
+function generate() {
 
     // the current maze must be of odd height & length 
-    console.log("Height of grid: " + num_cols);
-    console.log("Length of grid: " + num_rows);
+    var rows = document.getElementsByTagName("tr");
+
+    var num_cols = rows[0].getElementsByTagName("td").length;
+    var num_rows = rows.length;
 
     // Initialize a 2D array to keep track of cell status
     // Cell status "1" : Available 
@@ -213,20 +234,14 @@ window.onload = function() {
     var maze_2DArray = [];
 
     for(var i=0; i<num_rows; i++){
-        
-        const row = document.createElement("tr");
-
-        table.appendChild(row);
 
         maze_2DArray[i] = [];
 
+        var cols = rows[i].getElementsByTagName("td");
+
         for(var j=0; j<num_cols; j++){
             
-            const cell = document.createElement("td");
-            
-            cell.id = `${j},${i}`;
-
-            row.appendChild(cell);
+            cols[j].className = "notcolored";
 
             var top = i == 0;
             var bot = i == num_rows - 1;
@@ -236,17 +251,15 @@ window.onload = function() {
             if(top || bot || lef || rig){
                 // painting border
                 maze_2DArray[i][j] = "0";
-
-                cell.style.background = "rgb(255,0,0)";
+                cols[j].className = "colored";
             }
             else{
                 // current maze 
                 maze_2DArray[i][j] = "1";
+                cols[j].className = "notcolored";
             }
         }
     }  
-
-    container.appendChild(table);
 
     const min_row = 1;
     const min_col = 1;
@@ -254,6 +267,9 @@ window.onload = function() {
     const max_col = num_cols - 2;
 
     recursiveDivisionAlgorithm(maze_2DArray, min_row, min_col, max_row, max_col);
+
+    getOpening(num_cols, num_rows, 1);
+    getOpening(num_cols, num_rows, -1);
 }
 
 
