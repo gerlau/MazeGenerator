@@ -1,6 +1,6 @@
 # What is this project about?
 
-![Output](https://user-images.githubusercontent.com/48362970/101325287-78f54a80-38a6-11eb-8698-0c01f9eb5fe2.png)
+<img src="https://github.com/gerlau/MazeGenerator/tree/master/images/project-image.png"/> 
 
 Generating a maze with Javascript/HTML
 * Based on recursive division algorithm
